@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TabbedPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    android:TabbedPage.ToolbarPlacement="Bottom"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true"
+    BarBackgroundColor="{StaticResource BarBg}"
+    BarTextColor="{StaticResource BarText}"
+    xmlns:page="clr-namespace:News;assembly=News"
+    x:Class="News.Dashboard">
+    <NavigationPage.TitleView>
+        <Label
+            Text="{Binding TextBarTitle}"
+            HorizontalOptions="Center"
+            FontSize="18"
+            TextColor="White"/>
+    </NavigationPage.TitleView>
+    <TabbedPage.Children>
+        <page:ViewNews
+            Title="Новости">
+        </page:ViewNews>
+        <page:ViewFavorites
+            Title="Избранное">
+        </page:ViewFavorites>
+    </TabbedPage.Children>
+</TabbedPage>

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="News.ComponentsListNews"
+    x:Name="ViewComponentsListNews">
+    <ContentView.Content>
+            <CollectionView
+                Grid.Row="1"
+                BackgroundColor="Silver"
+                ItemsSource="{Binding SourceList, Source={x:Reference ViewComponentsListNews}}"
+                Margin="0">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Vertical"
+                        ItemSpacing="6"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView
+                            BackgroundColor="Transparent">
+                            <SwipeView.RightItems>
+                                <SwipeItems
+                                    Mode="Execute">
+                                    <SwipeItemView
+                                        IsVisible="{Binding IsSwaping, Source={x:Reference ViewComponentsListNews}}"
+                                        Command="{Binding Source={x:Reference Name=ViewComponentsListNews}, Path=BindingContext.CommandHideNews}"
+                                        CommandParameter="{Binding .}"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <SwipeView.LeftItems>
+                                <SwipeItems
+                                    Mode="Execute">
+                                    <SwipeItemView
+                                        IsVisible="{Binding IsSwaping, Source={x:Reference ViewComponentsListNews}}"
+                                        Command="{Binding Source={x:Reference Name=ViewComponentsListNews}, Path=BindingContext.CommandAddFavorites}"
+                                        CommandParameter="{Binding .}"/>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <SwipeView.Content>
+                                <StackLayout
+                                    BackgroundColor="Transparent"
+                                    Padding="16">
+                                    <Frame
+                                        BackgroundColor="White"
+                                        IsClippedToBounds="True"
+                                        HasShadow="False"
+                                        Padding="0"
+                                        CornerRadius="10">
+                                        <StackLayout
+                                            x:Name="ViewCellUI"
+                                            Padding="10"
+                                            Spacing="5">
+                                            <Label
+                                                Text="{Binding Title}"
+                                                Style="{StaticResource listLabelStyle}"
+                                                FontAttributes="Bold"
+                                                FontSize="18"/>
+                                            <Label
+                                                x:Name="ViewContent"
+                                                Text="{Binding Content}"
+                                                Style="{StaticResource listLabelStyle}"
+                                                IsVisible="False"/>
+                                            <Button
+                                                x:Name="ViewMoreAndHide"
+                                                Text="Показать еще..."
+                                                TextColor="Blue"
+                                                FontSize="14"
+                                                Padding="0"
+                                                HorizontalOptions="Start"
+                                                BackgroundColor="Transparent"
+                                                Command="{Binding Source={x:Reference ViewComponentsListNews}, Path=BindingContext.CommandUpdareContext}"
+                                                CommandParameter="{x:Reference ViewCellUI}"/>
+                                            <Label
+                                                Text="{Binding UpdatedAt, StringFormat='{0:dd MMMM yyyy}'}"
+                                                TextColor="Silver"
+                                                FontSize="14"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </SwipeView.Content>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+    </ContentView.Content>
+</ContentView>
